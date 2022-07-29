@@ -17,3 +17,7 @@ npm install
 
 npm start
 ```
+
+Then follow along the steps in this article.
+
+If you get lost at any point, you can compare your solution to the content of the _complete_ folder.
