@@ -1,10 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { clapForStory, selectStoriesList } from "../redux/stories";
+import {
+  clapForStory,
+  loadStories,
+  selectStoriesList,
+  selectStoriesLoadError,
+  selectStoriesLoading,
+} from "../redux/stories";
 
 const Stories = () => {
   const stories = useSelector(selectStoriesList);
+  const loading = useSelector(selectStoriesLoading);
+  const loadError = useSelector(selectStoriesLoadError);
 
   const dispatch = useDispatch();
 
@@ -12,7 +20,15 @@ const Stories = () => {
     dispatch(clapForStory(storyId));
   };
 
-  return (
+  React.useEffect(() => {
+    dispatch(loadStories());
+  }, [dispatch]);
+
+  return loading ? (
+    <p>loading...</p>
+  ) : loadError ? (
+    <p style={{ color: "red" }}>{loadError}</p>
+  ) : (
     <ul>
       {stories.map((story) => (
         <li key={story.id}>
