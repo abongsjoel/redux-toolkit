@@ -1,4 +1,18 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer } from "@reduxjs/toolkit";
+
+/* Actions */
+
+export const clapForStory = createAction("story/clap", (storyId) => {
+  return { payload: { id: storyId } };
+});
+
+/* Selectors */
+
+const selectStoriesState = (rootState) => rootState.stories;
+export const selectStoriesList = (rootState) =>
+  selectStoriesState(rootState).stories;
+
+/* Reducer */
 
 const initialState = {
   stories: [
@@ -19,13 +33,21 @@ const initialState = {
     {
       id: 3,
       name: "Redux — A birds-eye view",
-      claps: 699,
+      claps: 118,
       route:
         "https://levelup.gitconnected.com/redux-a-birds-eye-view-58925fc5ee8",
     },
   ],
 };
 
-const reducer = createReducer(initialState, {});
+const reducer = createReducer(initialState, {
+  [clapForStory]: (state, action) => {
+    const clappedStory = state.stories.find(
+      (story) => story.id === action.payload.id
+    );
+
+    clappedStory.claps += 1;
+  },
+});
 
 export default reducer;
