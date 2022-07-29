@@ -1,14 +1,6 @@
-import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 /* Actions */
-
-export const clapForStory = createAction("story/clap", (storyId) => {
-  return { payload: { id: storyId } };
-});
 
 export const loadStories = createAsyncThunk("story/load", async () => {
   const response = await fetch("http://localhost:3001/stories");
@@ -34,29 +26,41 @@ const initialState = {
   stories: [],
 };
 
-const reducer = createReducer(initialState, {
-  [clapForStory]: (state, action) => {
-    const clappedStory = state.stories.find(
-      (story) => story.id === action.payload.id
-    );
-
-    clappedStory.claps += 1;
+const storiesSlice = createSlice({
+  name: "stories",
+  initialState,
+  reducers: {
+    clapForStory: {
+      reducer: (state, action) => {
+        const clappedStory = state.stories.find(
+          (story) => story.id === action.payload.id
+        );
+        clappedStory.claps += 1;
+      },
+      prepare: (storyId) => {
+        return { payload: { id: storyId } };
+      },
+    },
   },
 
-  [loadStories.pending]: (state) => {
-    state.storiesLoading = true;
-  },
+  extraReducers: {
+    [loadStories.pending]: (state) => {
+      state.storiesLoading = true;
+    },
 
-  [loadStories.fulfilled]: (state, action) => {
-    state.storiesLoading = false;
-    state.stories = action.payload.stories;
-  },
+    [loadStories.fulfilled]: (state, action) => {
+      state.storiesLoading = false;
+      state.stories = action.payload.stories;
+    },
 
-  [loadStories.rejected]: (state) => {
-    state.storiesLoading = false;
-    state.error =
-      "Error, something went wrong. Contact support if problem persis";
+    [loadStories.rejected]: (state) => {
+      state.storiesLoading = false;
+      state.error =
+        "Error, something went wrong. Contact support if problem persist";
+    },
   },
 });
 
-export default reducer;
+export const { clapForStory } = storiesSlice.actions;
+
+export default storiesSlice.reducer;
