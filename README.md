@@ -1,1 +1,19 @@
-# redux-toolkit
+# Redux Toolkit Tutorial
+
+This project contains a very simple workflow of how to get started with Redux using the Redux toolkit
+
+In this repository are three folders:
+
+- starter
+- complete
+- with createSlice
+
+To follow along with the Tutorials, navigate into the starter folder and run npm install i.e.
+
+```
+cd starter
+
+npm install
+
+npm start
+```
