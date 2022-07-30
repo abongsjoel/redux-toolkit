@@ -26,7 +26,7 @@ The _with createSlice_ folder contains the code restructured to use slices.
 
 ## Built Using
 
-- JavaScritp
+- JavaScript
 - React
 - Redux
 
