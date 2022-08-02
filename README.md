@@ -46,7 +46,7 @@ Feel free to check the [issues page](https://github.com/abongsjoel/redux-toolkit
 
 ## Acknowledgments
 
-- []()
+- [DD ENGINEERING](https://dd.engineering/about)
 
 
 ## Show your support
