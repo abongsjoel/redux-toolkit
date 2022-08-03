@@ -18,7 +18,7 @@ npm install
 npm start
 ```
 
-Then follow along the steps in this article.
+Then follow along the steps in [this article](https://levelup.gitconnected.com/redux-toolkit-a-simple-example-workflow-20efcee54635).
 
 If you get lost at any point, you can compare your solution to the content of the _complete_ folder.
 
